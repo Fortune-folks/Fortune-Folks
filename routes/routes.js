@@ -19,17 +19,17 @@ router.get("/", (req, res) => {
 ////////////////////////////////////////
 
 //User Registration
-router.get("/register", (req, res) => {
+router.get("/register",isloggedin, (req, res) => {
   res.render("register");
 });
-router.post("/register", userController.register);
+router.post("/register",isloggedin, userController.register);
 
 //User login
-router.get("/login", (req, res) => {
+router.get("/login",isloggedin,(req, res) => {
   res.render("login");
 });
 router.post(
-  "/login",
+  "/login",isloggedin,
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
@@ -48,5 +48,13 @@ router.get("/dashboard", (req, res) => {
 });
 
 /////////////////////////////////////////
+
+// to restrict loggedin users from accessing login/register pages 
+function isloggedin(req,res,next){
+  if(req.isAuthenticated()){
+    return res.redirect('/');
+  }
+  next();
+}
 
 module.exports = router;
