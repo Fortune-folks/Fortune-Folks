@@ -1,13 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/user");
+const passport = require("passport");
+const initializePassport = require("../passport-config");
 
+initializePassport(passport);
 ////////////////////////////////////////
 //////////// Main Routes////////////////
 ////////////////////////////////////////
 
 router.get("/", (req, res) => {
-	res.render("index");
+  const isauth = req.isAuthenticated();
+  res.render("index", { isauth: isauth,name:"Nitheesh" });
 });
 
 //////////////////////////////////////////
@@ -16,21 +20,31 @@ router.get("/", (req, res) => {
 
 //User Registration
 router.get("/register", (req, res) => {
-	res.render("register");
+  res.render("register");
 });
 router.post("/register", userController.register);
 
 //User login
 router.get("/login", (req, res) => {
-	res.render("/login");
+  res.render("login");
 });
-router.post("/login", (req, res) => {
-	console.log(req.body);
+router.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
+
+router.get("/logout", (req, res) => {
+  req.logOut();
+  return res.redirect("/");
 });
 
 //User Dashboard Page
 router.get("/dashboard", (req, res) => {
-	res.render("dashboard");
+  res.render("dashboard");
 });
 
 /////////////////////////////////////////

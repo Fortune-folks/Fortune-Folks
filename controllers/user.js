@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 //User registration
 
 exports.register = async (req, res) => {
-	console.log(req.body);
+	// console.log(req.body);
 	//checking if an user already exists with this particular email
 	const tempUser = await User.findOne({ email: req.body.email });
 	if (tempUser) {
@@ -40,10 +40,7 @@ exports.register = async (req, res) => {
 
 		//Saving the user details in database
 		const savedData = await user.save();
-		res.status(200).json({
-			message: "Registered Succesfully",
-			user: savedData,
-		});
+		res.redirect('/login');
 	} catch (err) {
 		res.status(500).json({
 			message: "Internal Server Error",
