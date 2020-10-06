@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 
 //User Registration
 router.get("/register", (req, res) => {
-	res.render("register");
+	res.render("register", { error: "This is the error" });
 });
 router.post("/register", userController.register);
 

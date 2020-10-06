@@ -41,6 +41,7 @@ con.on("open", () => {
 const routes = require("./routes/routes.js");
 app.use("/", routes);
 
+
 //Making the server to listen to a port
 app.listen(process.env.PORT || 9000, () => {
 	console.log("SERVER STARTED.....");

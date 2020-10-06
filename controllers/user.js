@@ -9,18 +9,20 @@ exports.register = async (req, res) => {
 	const tempUser = await User.findOne({ email: req.body.email });
 	if (tempUser) {
 		//If a user exists simply return with a 409 status.
-		return res.status(409).json({
-			message: "Email already in use",
-		});
+		// return res.status(409).json({
+		// 	message: "Email already in use",
+		// });
+		res.redirect(409, "/register", { error: "Email already used" });
 	}
 
 	//checking if an user already exists with this particular mobileNo
 	const tempUser2 = await User.findOne({ mobileNo: req.body.mobileNo });
 	if (tempUser2) {
 		//If a user exists simply return with a 409 status.
-		return res.status(409).json({
-			message: "Mobile Number already in use",
-		});
+		// return res.status(409).json({
+		// 	message: "Mobile Number already in use",
+		// });
+		res.redirect(409, "/register", { error: "Phone Number already used" });
 	}
 	try {
 		//Generating a hash for the user password
@@ -40,14 +42,12 @@ exports.register = async (req, res) => {
 
 		//Saving the user details in database
 		const savedData = await user.save();
-		res.status(200).json({
-			message: "Registered Succesfully",
-			user: savedData,
-		});
+		// res.status(200).json({
+		// 	message: "Registered Succesfully",
+		// 	user: savedData,
+		// });
+		res.redirect("/login");
 	} catch (err) {
-		res.status(500).json({
-			message: "Internal Server Error",
-			error: err,
-		});
+		res.redirect(500, "/error", { error: "Internal Server Error" });
 	}
 };
