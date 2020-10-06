@@ -11,7 +11,7 @@ initializePassport(passport);
 
 router.get("/", (req, res) => {
   const isauth = req.isAuthenticated();
-  res.render("index", { isauth: isauth,name:"Nitheesh" });
+  res.render("index", { isauth: isauth, name: "Nitheesh" });
 });
 
 //////////////////////////////////////////
@@ -19,17 +19,18 @@ router.get("/", (req, res) => {
 ////////////////////////////////////////
 
 //User Registration
-router.get("/register",isloggedin, (req, res) => {
+router.get("/register", isloggedin, (req, res) => {
   res.render("register");
 });
-router.post("/register",isloggedin, userController.register);
+router.post("/register", isloggedin, userController.register);
 
 //User login
-router.get("/login",isloggedin,(req, res) => {
+router.get("/login", isloggedin, (req, res) => {
   res.render("login");
 });
 router.post(
-  "/login",isloggedin,
+  "/login",
+  isloggedin,
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",
@@ -49,10 +50,10 @@ router.get("/dashboard", (req, res) => {
 
 /////////////////////////////////////////
 
-// to restrict loggedin users from accessing login/register pages 
-function isloggedin(req,res,next){
-  if(req.isAuthenticated()){
-    return res.redirect('/');
+// to restrict loggedin users from accessing login/register pages
+function isloggedin(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect("/");
   }
   next();
 }
