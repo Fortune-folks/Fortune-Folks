@@ -3,23 +3,29 @@ const flash = require("express-flash");
 const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
-const passport=require('passport');
-const session =require('express-session');
-app.use(flash())
-app.use(session({
-	secret:process.env.SESSION_SECRET,
-	resave:false,
-	saveUninitialized:false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-//Setting the encodings for post requests
-app.use(express.json()); // to support JSON-encoded bodies
-app.use(express.urlencoded({ extended: false })); // to support URL-encoded bodies
+const passport = require("passport");
+const session = require("express-session");
+
+//////////////////////////////////////////////
+/////Setting Up middlewares for express///////
+/////////////////////////////////////////////
+
+app.use(flash());
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET,
+		resave: false,
+		saveUninitialized: false,
+	})
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static("public"));
 
-// Setting up the view engine
 app.set("view engine", "ejs");
 
 ////////////////////////////////////////////
@@ -45,13 +51,18 @@ con.on("open", () => {
 });
 
 ///////////////////////////////////////////////
-
-//Setting up routes
+//////////////Setting up routes////////////////
+//////////////////////////////////////////////
 const routes = require("./routes/routes.js");
 app.use("/", routes);
 
-
-//Making the server to listen to a port
+//If no routes responded
+app.use("/", (req, res) => {
+	res.render("error404", { url: req.url });
+});
+/////////////////////////////////////////////
+//////////// Starting the Server ////////////
+/////////////////////////////////////////////
 app.listen(process.env.PORT || 9000, () => {
-	console.log("SERVER STARTED.....");
+	console.log("SERVER STARTED");
 });

@@ -8,11 +8,17 @@
 	<body>
 		<h1>This is the home page of our website</h1>
 		<% if (isauth) { %>
-			<h1>Hi <%= name %></h1>	
-			<a href="/logout">logout</a>
+
+		<div>
+			<h2>Name:<%= user.firstName+" "+user.lastName %></h2>
+			<h2>Food Donated: <%= user.foodDonated %></h2>
+			<h2>Food Requested: <%= user.foodRequested %></h2>
+		</div>
+		<a href="/logout">logout</a>
+
 		<% } else { %>
-		<a href="/register">Signup</a>
+		<a href="/register">Register</a>
 		<a href="/login">Login</a>
-		<%}%>
+		<% } %>
 	</body>
 </html>
