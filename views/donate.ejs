@@ -1,61 +1,73 @@
-<h1>Donate Food</h1>
-<form id="demo"  method="POST"  action="/donate">
-	<label for="quantity">Quantity</label>
-	<input onchange="getLocation()" type="number" id="quantity" name="quantity" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body onload="getLocation()">
+    <h1>Donate Food</h1>
+    <form id="demo" method="POST" action="/donate">
+      <label for="quantity">Quantity</label>
+      <input
+       
+        type="number"
+        id="quantity"
+        name="quantity"
+      />
 
-	<label for="description">Description</label>
-	<textarea id="description" name="description"></textarea>
+      <label for="description">Description</label>
+      <textarea id="description" name="description"></textarea>
 
-	<h3>Pick Up Address</h3>
-	<label for="addLine1">Address Line 1</label>
-	<input type="text" id="addLine1" name="addLine1" />
+      <h3>Pick Up Address</h3>
+      <label for="addLine1">Address Line 1</label>
+      <input type="text" id="addLine1" name="addLine1" />
 
-	<label for="addLine2">Address Line 2</label>
-	<input type="text" id="addLine2" name="addLine2" />
+      <label for="addLine2">Address Line 2</label>
+      <input type="text" id="addLine2" name="addLine2" />
 
-	<label for="city">City</label>
-	<input type="text" id="city" name="city" />
-	<input type="hidden" id="latitude" name="latitude" value=""/>
-	<input type="hidden" id="longitude" name="longitude" value=""/>
-	<input  type="submit" />
-</form>
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" />
+      <input type="hidden" id="latitude" name="latitude" value="" />
+      <input type="hidden" id="longitude" name="longitude" value="" />
+      <input type="submit" />
+    </form>
+  </body>
+  <script>
+    var x = document.getElementById("latitude");
+    var y = document.getElementById("longitude");
+    var z = document.getElementById("demo");
 
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        z.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
 
-<script >
-	var x = document.getElementById("latitude");
-	var y=document.getElementById('longitude');
-	var z=document.getElementById('demo');
+    function showPosition(position) {
+      // x.innerHTML =
+      // "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+      x.value = position.coords.latitude;
+      y.value = position.coords.latitude;
+    }
 
-function getLocation() {
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition, showError);
-	} else {
-		z.innerHTML = "Geolocation is not supported by this browser.";
-	}
-}
-
-function showPosition(position) {
-	// x.innerHTML =
-		// "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-		x.value=position.coords.latitude;
-		y.value=position.coords.latitude;
-}
-
-function showError(error) {
-	switch (error.code) {
-		case error.PERMISSION_DENIED:
-			z.innerHTML = "User denied the request for Geolocation.";
-			break;
-		case error.POSITION_UNAVAILABLE:
-			z.innerHTML = "Location information is unavailable.";
-			break;
-		case error.TIMEOUT:
-			z.innerHTML = "The request to get user location timed out.";
-			break;
-		case error.UNKNOWN_ERROR:
-			z.innerHTML = "An unknown error occurred.";
-			break;
-	}
-}
-
-</script>
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          z.innerHTML = "User denied the request for Geolocation.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          z.innerHTML = "Location information is unavailable.";
+          break;
+        case error.TIMEOUT:
+          z.innerHTML = "The request to get user location timed out.";
+          break;
+        case error.UNKNOWN_ERROR:
+          z.innerHTML = "An unknown error occurred.";
+          break;
+      }
+    }
+  </script>
+</html>
