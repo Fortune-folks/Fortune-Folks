@@ -1,31 +1,39 @@
-var x = document.getElementById("demo");
+var errPlaceholder = document.getElementById("error");
 
 function getLocation() {
 	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition, showError);
+		navigator.geolocation.getCurrentPosition(getPosition, showError);
 	} else {
-		x.innerHTML = "Geolocation is not supported by this browser.";
+		errPlaceholder.innerHTML = "Geolocation is not supported by this browser.";
+		return false;
 	}
 }
 
-function showPosition(position) {
-	x.innerHTML =
-		"Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+function getPosition(position) {
+	console.log(position);
+	//Not woring god knows why
+	// document.getElementById("latitute").value = position.coords.latitude;
+	// document.getElementById("longitute").value = position.coords.longitute;
+	document.donationForm.latitute.value = position.coords.latitude;
+	document.donationForm.longitute.value = position.coords.longitute;
+	document.donationForm.description.value = "Why not working dear";
+	return true;
 }
 
 function showError(error) {
 	switch (error.code) {
 		case error.PERMISSION_DENIED:
-			x.innerHTML = "User denied the request for Geolocation.";
+			errPlaceholder.innerHTML = "User denied the request for Geolocation.";
 			break;
 		case error.POSITION_UNAVAILABLE:
-			x.innerHTML = "Location information is unavailable.";
+			errPlaceholder.innerHTML = "Location information is unavailable.";
 			break;
 		case error.TIMEOUT:
-			x.innerHTML = "The request to get user location timed out.";
+			errPlaceholder.innerHTML = "The request to get user location timed out.";
 			break;
 		case error.UNKNOWN_ERROR:
-			x.innerHTML = "An unknown error occurred.";
+			errPlaceholder.innerHTML = "An unknown error occurred.";
 			break;
 	}
+	return false;
 }

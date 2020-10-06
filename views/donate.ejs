@@ -1,5 +1,6 @@
 <h1>Donate Food</h1>
-<form method="POST" action="/donate">
+<p id="error"></p>
+<form name="donationForm" method="POST" action="/donate">
 	<label for="quantity">Quantity</label>
 	<input type="number" id="quantity" name="quantity" />
 
@@ -16,5 +17,10 @@
 	<label for="city">City</label>
 	<input type="text" id="city" name="city" />
 
-	<input type="submit" />
+	<input type="hidden" id="latitute" name="latitute" value="" />
+	<input type="hidden" id="longitute" name="longitute" value="" />
+
+	<input type="submit" onclick="getLocation()" />
 </form>
+
+<script src="getLocation.js"></script>
