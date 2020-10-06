@@ -19,13 +19,8 @@ router.get("/", (req, res) => {
 ////////////////////////////////////////
 
 //User Registration
-<<<<<<< HEAD
-router.get("/register", (req, res) => {
-	res.render("register", { error: "This is the error" });
-=======
 router.get("/register",isloggedin, (req, res) => {
   res.render("register");
->>>>>>> dc14858db8affd0183b4d22c359e62cd1cd383ae
 });
 router.post("/register",isloggedin, userController.register);
 

@@ -17,7 +17,6 @@ app.use(passport.session())
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: false })); // to support URL-encoded bodies
 
-// setting the public static folder
 app.use(express.static("public"));
 
 // Setting up the view engine
