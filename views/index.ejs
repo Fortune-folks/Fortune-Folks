@@ -7,7 +7,12 @@
 	</head>
 	<body>
 		<h1>This is the home page of our website</h1>
+		<% if (isauth) { %>
+			<h1>Hi <%= name %></h1>	
+			<a href="/logout">logout</a>
+		<% } else { %>
 		<a href="/register">Signup</a>
 		<a href="/login">Login</a>
+		<%}%>
 	</body>
 </html>

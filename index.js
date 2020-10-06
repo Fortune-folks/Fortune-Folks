@@ -1,8 +1,18 @@
 const express = require("express");
+const flash = require("express-flash");
 const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
-
+const passport=require('passport');
+const session =require('express-session');
+app.use(flash())
+app.use(session({
+	secret:process.env.SESSION_SECRET,
+	resave:false,
+	saveUninitialized:false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 //Setting the encodings for post requests
 app.use(express.json()); // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: false })); // to support URL-encoded bodies
