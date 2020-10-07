@@ -7,12 +7,14 @@ exports.register = async (req, res) => {
 	//checking if an user already exists with this particular email
 	const tempUser = await User.findOne({ email: req.body.email });
 	if (tempUser) {
-		res.redirect(409, "/register");
+		res.render("register", { error: "Email already used" });
+		return;
 	}
 	//checking if an user already exists with this particular mobileNo
 	const tempUser2 = await User.findOne({ mobileNo: req.body.mobileNo });
 	if (tempUser2) {
-		res.redirect(409, "/register");
+		res.render("register", { error: "Mobile Number already used" });
+		return;
 	}
 	try {
 		//Generating a hash for the user password

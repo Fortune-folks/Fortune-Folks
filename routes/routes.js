@@ -33,7 +33,7 @@ router.post("/donate", isloggedin, donationController.addDonation);
 ////////////////////////////////////////
 
 router.get("/register", (req, res) => {
-	res.render("register");
+	res.render("register", { error: "" });
 });
 
 router.post("/register", userController.register);
