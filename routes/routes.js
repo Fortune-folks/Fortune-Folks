@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/user");
+const donationController = require("../controllers/donations");
 const passport = require("passport");
 const initializePassport = require("../passport-config");
-
 initializePassport(passport);
 
 ////////////////////////////////////////
@@ -26,10 +26,7 @@ router.get("/donate", isloggedin, (req, res) => {
 	res.render("donate");
 });
 
-router.post("/donate", isloggedin, async (req, res) => {
-	//Logic to retrive data from form and add to database goes here
-	console.log(req.body);
-});
+router.post("/donate", isloggedin, donationController.addDonation);
 
 //////////////////////////////////////////
 /////// User  Authentication Routes ///////

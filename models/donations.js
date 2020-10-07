@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("../models/user");
 
 const donationSchema = new mongoose.Schema({
 	userId: {
@@ -28,4 +29,13 @@ const donationSchema = new mongoose.Schema({
 	},
 });
 
+donationSchema.post("save", async (doc) => {
+	try {
+		const user = await User.findById(doc.userId);
+		user.foodDonated = user.foodDonated + 1;
+		await user.save();
+	} catch (err) {
+		throw err;
+	}
+});
 module.exports = mongoose.model("Donation", donationSchema);
