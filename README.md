@@ -8,3 +8,12 @@ Excessive food listing portal for avoiding food wastage. People can list the ava
 2. place the .env file in the root folder.
 3. make sure you installed required database dependencies.
 4. run npm run devstart.
+
+# TO-DO
+
+[x] Authentication
+[x] donations listing page
+[x] requests listing page
+[] user profile page
+[] adding fuctionality to donations/requests to mark them as completed.
+ 

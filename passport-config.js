@@ -22,7 +22,7 @@ function initialize(passport) {
 	passport.use(new localstrategy({ usernameField: "email" }, authenticateUser));
 
 	passport.serializeUser((user, done) => {
-		done(null, user[0]._id)});
+		done(null, user[0])});
 
 	passport.deserializeUser((id, done) => {
 		getuserbyid = async (id) => {
