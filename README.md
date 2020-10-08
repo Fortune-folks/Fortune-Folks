@@ -11,8 +11,8 @@ Excessive food listing portal for avoiding food wastage. People can list the ava
 
 # TO-DO
 
-1. [x] Authentication
-2. [x] donations listing page
-3. [x] requests listing page
-4. [] user profile page
-5. [] adding fuctionality to donations/requests to mark them as completed.
+* [x] Authentication
+* [x] donations listing page
+* [x] requests listing page
+* [ ] user profile page
+* [ ] adding fuctionality to donations/requests to mark them as completed.
