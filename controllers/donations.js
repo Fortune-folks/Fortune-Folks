@@ -32,3 +32,44 @@ exports.addDonation = async (req, res) => {
 		//Redirect error page code goes here
 	}
 };
+
+exports.getDonations = async (req, res) => {
+	const data = await Donation.find();
+	data.sort((a, b) => {
+		var t1 = new Date(a.createdOn);
+		var t2 = new Date(b.createdOn);
+		return t1.getTime() < t2.getTime();
+	});
+	// TO-DO
+	// Should implement more optimal solution for this loop as this increases loading time of page when DB is large.
+	for (let i = 0; i < data.length; i++) {
+		let temp = await User.findById(data[i].userId);
+		let temp2 = await Address.findById(data[i].pickAddress);
+		data[i]["firstname"] = temp.firstName;
+		data[i]["lastname"] = temp.lastName;
+		data[i]["mobileno"] = temp.mobileNo;
+		data[i]["time"] = date_and_time(data[i].createdOn);
+		data[i]["address"] = temp2.addressLine1 + " " + temp2.addressLine2 + " " + temp2.city;
+		data[i]["location"] = temp2.location.coordinates[0] + "," + temp2.location.coordinates[1];
+	}
+	res.render("donationlist", { data: data });
+};
+
+/////////////////////////////////////////////////
+///////////// Helper Methods ///////////////////
+////////////////////////////////////////////////
+
+function date_and_time(postedTime) {
+	var postedTime = new Date(postedTime);
+	var diffTime = Math.abs(Date.now() - postedTime);
+	var diffSec = Math.ceil(diffTime / 1000);
+	if (diffSec <= 59) {
+		return "Less than a Minute";
+	} else if (diffSec >= 60 && diffSec < 3600) {
+		return Math.floor(diffSec / 60) + "mins ";
+	} else if (up >= 3600 && up < 86400) {
+		return Math.floor(up / 3600) + "hours " + Math.floor((up % 3600) / 60) + "mins ";
+	} else {
+		return "More than 24 hours";
+	}
+}

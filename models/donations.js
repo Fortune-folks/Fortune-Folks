@@ -17,8 +17,8 @@ const donationSchema = new mongoose.Schema({
 		default: 1,
 	},
 	createdOn: {
-		type: Number,
-		default: Date.now(),
+		type: Date,
+		default: Date.now,
 	},
 	description: {
 		type: String,
