@@ -64,5 +64,5 @@ app.use("/", (req, res) => {
 //////////// Starting the Server ////////////
 /////////////////////////////////////////////
 app.listen(process.env.PORT || 9000, () => {
-	console.log("SERVER STARTED");
+	console.log("SERVER STARTED ON PORT 9000 IN LOCALHOST...");
 });

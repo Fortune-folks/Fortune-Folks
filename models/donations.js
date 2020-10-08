@@ -12,13 +12,13 @@ const donationSchema = new mongoose.Schema({
 		ref: "Address",
 		required: true,
 	},
-	quanity: {
+	quantity: {
 		type: Number,
 		default: 1,
 	},
 	createdOn: {
-		type: Date,
-		default: Date.now,
+		type: Number,
+		default: Date.now(),
 	},
 	description: {
 		type: String,

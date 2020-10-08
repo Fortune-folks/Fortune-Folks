@@ -26,7 +26,7 @@ exports.addDonation = async (req, res) => {
 		});
 		const savedDon = await donation.save();
 		//todo: Make an donation listing page and redirect there
-		res.redirect("/");
+		res.redirect("/donationlist");
 	} catch (err) {
 		console.log("Internal Server Error");
 		//Redirect error page code goes here

@@ -30,41 +30,25 @@
     ></script>
   </head>
   <body>
-    <h1>User Register</h1>
-    <%if (error) {%> <%= error %> <% } %>
-    <form action="/register" method="POST">
-      <div>
-        <label for="fname">First Name</label>
-        <input type="text" id="fname" name="fname" />
+    <% data.forEach(datam=>{ %> <% if (datam.isAvailable) {%>
+    <div class="card m-4">
+      <div class="card-header">
+        <h4 class="">
+          <%= datam.firstname +' '+ datam.lastname +'-'+ datam.mobileno %>
+        </h4>
       </div>
-
-      <div>
-        <label for="lname">Last Name</label>
-        <input type="text" id="lname" name="lname" />
+      <div class="card-body">
+        <h5 class="card-title">Food for <%= datam.quantity %> Members</h5>
+        <p class="card-text"><%= datam.description %></p>
+        <p class="card-text"><%= datam.address %></p>
+        <p class="card-text">Posted <%= datam.time %> ago</p>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=<%= datam.location %>"
+          class="btn btn-primary"
+          >Location Here</a
+        >
       </div>
-
-      <div>
-        <label for="dob">Date Of Birth</label>
-        <input type="date" id="dob" name="dob" />
-      </div>
-
-      <div>
-        <lable for="email">Email</lable>
-        <input type="email" id="email" name="email" />
-      </div>
-
-      <div>
-        <lable for="password">Password</lable>
-        <input type="password" id="password" name="password" />
-      </div>
-
-      <div>
-        <lable for="mobileNo">Mobile Number</lable>
-        <input type="text" id="mobileNo" name="mobileNo" />
-      </div>
-
-      <button type="submit">Submit</button>
-    </form>
-    <a href="/login">Login</a>
+    </div>
+    <%}%> <% }) %>
   </body>
 </html>

@@ -1,70 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-	</head>
-	<body>
-		<h1>Donate Food</h1>
-		<form id="demo" method="POST" action="/donate">
-			<label for="quantity">Quantity</label>
-			<input type="number" id="quantity" name="quantity" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- CSS only -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
 
-			<label for="description">Description</label>
-			<textarea id="description" name="description"></textarea>
+    <!-- JS, Popper.js, and jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>Donate Food</h1>
+    <form id="demo" method="POST" action="/donate">
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" required />
 
-			<h3>Pick Up Address</h3>
-			<label for="addLine1">Address Line 1</label>
-			<input type="text" id="addLine1" name="addLine1" />
+      <label for="description">Description</label>
+      <textarea id="description" name="description" required></textarea>
 
-			<label for="addLine2">Address Line 2</label>
-			<input type="text" id="addLine2" name="addLine2" />
+      <h3>Pick Up Address</h3>
+      <label for="addLine1">Address Line 1</label>
+      <input type="text" id="addLine1" name="addLine1" required />
 
-			<label for="city">City</label>
-			<input type="text" id="city" name="city" />
-			<input type="hidden" id="latitude" name="latitude" value="" />
-			<input type="hidden" id="longitude" name="longitude" value="" />
+      <label for="addLine2">Address Line 2</label>
+      <input type="text" id="addLine2" name="addLine2" required />
 
-			<input type="submit" />
-		</form>
-	</body>
-	<script src="getLocation.js"></script>
-	<!-- <script>
-		var lat = document.getElementById("latitude");
-		var lon = document.getElementById("longitude");
-		var z = document.getElementById("demo");
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" required />
+      <input type="hidden" id="latitude" name="latitude" value="" required />
+      <input type="hidden" id="longitude" name="longitude" value="" required />
 
-		function getLocation() {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(showPosition, showError);
-			} else {
-				z.innerHTML = "Geolocation is not supported by this browser.";
-			}
-		}
-
-		function showPosition(position) {
-			// x.innerHTML =
-			// "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
-			lat.value = position.coords.latitude;
-			lon.value = position.coords.longitute;
-		}
-
-		function showError(error) {
-			switch (error.code) {
-				case error.PERMISSION_DENIED:
-					z.innerHTML = "User denied the request for Geolocation.";
-					break;
-				case error.POSITION_UNAVAILABLE:
-					z.innerHTML = "Location information is unavailable.";
-					break;
-				case error.TIMEOUT:
-					z.innerHTML = "The request to get user location timed out.";
-					break;
-				case error.UNKNOWN_ERROR:
-					z.innerHTML = "An unknown error occurred.";
-					break;
-			}
-		}
-	</script> -->
+      <input type="submit" />
+    </form>
+  </body>
+  <script src="getLocation.js"></script>
 </html>
