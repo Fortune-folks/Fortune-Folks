@@ -34,8 +34,9 @@
     <div class="card m-4">
       <div class="card-header">
         <h4 class="">
-          <%= datam.firstname +' '+ datam.lastname +'-'+ datam.mobileno %>
-        </h4>
+          <%= datam.firstname +' '+ datam.lastname %> 
+          
+        </h4><a href="tel:<%=datam.mobileno%>"> <%=datam.mobileno%> </a>
       </div>
       <div class="card-body">
         <h5 class="card-title">Food for <%= datam.quantity %> Members</h5>
