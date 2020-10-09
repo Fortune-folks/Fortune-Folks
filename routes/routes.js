@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require("../controllers/user");
 const donationController = require("../controllers/donations");
 const passport = require("passport");
-const initializePassport = require("../passport-config");
+const initializePassport = require("./passport-config");
 initializePassport(passport);
 
 ////////////////////////////////////////
