@@ -30,21 +30,16 @@
 		></script>
 	</head>
 	<body>
-		<h1>This is the home page of our website</h1>
-		<% if (isauth) { %>
-
+		<h1>Dashboard</h1>
 		<div>
 			<h2>Name:<%= user.firstName+" "+user.lastName %></h2>
 			<h2>Food Donated: <%= user.foodDonated %></h2>
 			<h2>Food Requested: <%= user.foodRequested %></h2>
 		</div>
+		<h1>My Donations</h1>
+		<%- include('_foodList',{data:donations,delRoute:"/donations/del/"}); -%>
+		<h1>My Requests</h1>
+		<%- include('_foodList',{data:requests,delRoute:"/requests/del/"}); -%>
 		<a href="/logout">logout</a>
-		<a href="/donations">All Donations</a>
-		<a href="/requests">All Requests</a>
-		<a href="/dashboard">Dashboard</a>
-		<% } else { %>
-		<a href="/register">Register</a>
-		<a href="/login">Login</a>
-		<% } %>
 	</body>
 </html>

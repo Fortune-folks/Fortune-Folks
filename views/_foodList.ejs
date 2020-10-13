@@ -1,0 +1,23 @@
+<% data.forEach(datam=>{ %> <% if (datam.isAvailable) {%>
+<div class="card m-4">
+	<div class="card-header">
+		<h4 class=""><%= datam.firstname +' '+ datam.lastname %></h4>
+		<a href="tel:<%=datam.mobileno%>"> <%=datam.mobileno%> </a>
+	</div>
+	<div class="card-body">
+		<h5 class="card-title">Food for <%= datam.quantity %> Members</h5>
+		<p class="card-text"><%= datam.description %></p>
+		<p class="card-text"><%= datam.address %></p>
+		<p class="card-text">Posted <%= datam.time %> ago</p>
+		<a
+			href="https://www.google.com/maps/search/?api=1&query=<%= datam.location %>"
+			target="_blank"
+			class="btn btn-primary"
+			>Location Here</a
+		>
+		<% if (delRoute) {%>
+		<a href="<%= delRoute+datam._id %>" class="btn btn-danger">Delete</a>
+		<%}%>
+	</div>
+</div>
+<%}%> <% }) %>

@@ -39,6 +39,7 @@ const connURL =
 	"@cluster0-avdpm.mongodb.net/" +
 	process.env.DB_NAME +
 	"?retryWrites=true&w=majority";
+
 mongoose.connect(connURL, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,

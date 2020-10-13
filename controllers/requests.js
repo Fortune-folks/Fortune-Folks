@@ -1,10 +1,9 @@
-const Donation = require("../models/donations");
 const User = require("../models/user");
 const Address = require("../models/address");
+const Request = require("../models/requests");
 
-// Adds a donation by a user to the databasee
-exports.addDonation = async (req, res) => {
-	//Getting the user who donated
+exports.addRequest = async (req, res) => {
+	//Getting the user who requested
 	const user = (await req.user)[0];
 
 	const address = new Address({
@@ -18,25 +17,24 @@ exports.addDonation = async (req, res) => {
 	});
 	try {
 		const savedAddr = await address.save();
-		//Now creating the donation
-		const donation = new Donation({
+		//Now creating the request
+		const request = new Request({
 			userId: user._id,
 			pickAddress: savedAddr._id,
 			quantity: req.body.quantity,
 			description: req.body.description,
 		});
-		const savedDon = await donation.save();
-		//todo: Make an donation listing page and redirect there
-		res.redirect("/donations");
+		const savedDon = await request.save();
+		//todo: Make an request listing page and redirect there
+		res.redirect("/requests");
 	} catch (err) {
 		console.log("Internal Server Error");
 		//Redirect error page code goes here
 	}
 };
 
-// Gets all the donations
-exports.getDonations = async (req, res) => {
-	const data = await Donation.find({ isAvailable: true })
+exports.getRequests = async (req, res) => {
+	const data = await Request.find({ isAvailable: true })
 		.populate("userId")
 		.populate("pickAddress")
 		.sort({ createdOn: "asc" });
@@ -52,12 +50,12 @@ exports.getDonations = async (req, res) => {
 		data[i]["address"] = temp2.addressLine1 + " " + temp2.addressLine2 + " " + temp2.city;
 		data[i]["location"] = temp2.location.coordinates[0] + "," + temp2.location.coordinates[1];
 	}
-	res.render("donations", { data: data });
+	res.render("requests", { data: data });
 };
 
-exports.getDonationsByUser = async (req, res) => {
+exports.getRequestsByUser = async (req, res) => {
 	const user = (await req.user)[0];
-	const data = await Donation.find({ userId: user._id });
+	const data = await Request.find({ userId: user._id });
 	data.sort((a, b) => {
 		var t1 = new Date(a.createdOn);
 		var t2 = new Date(b.createdOn);
@@ -78,12 +76,12 @@ exports.getDonationsByUser = async (req, res) => {
 	return data;
 };
 
-exports.deleteDonation = async (req, res) => {
-	const donationID = req.params.id;
+exports.deleteRequest = async (req, res) => {
+	const requestID = req.params.id;
 	const user = (await req.user)[0];
 	//Delete the donation
 	try {
-		await Donation.findOneAndDelete({ _id: donationID, userId: user._id });
+		await Request.findOneAndDelete({ _id: requestID, userId: user._id });
 		res.redirect("/dashboard");
 	} catch (error) {
 		res.redirect("/error404");
