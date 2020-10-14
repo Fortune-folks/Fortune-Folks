@@ -30,9 +30,10 @@
 		></script>
 	</head>
 	<body>
-		<%- include('_donationForm'); -%>
-		<h1>Requests</h1>
-		<%- include('_foodList',{data:data, delRoute:false}); -%>
+		<a href="/donations/add">Donate</a>
+		<div id="container1">
+			<h1>Requests</h1>
+			<%- include('_foodList',{data:data, delRoute:false}); -%>
+		</div>
 	</body>
-	<script src="getLocation.js"></script>
 </html>

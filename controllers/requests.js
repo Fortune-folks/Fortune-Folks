@@ -81,7 +81,10 @@ exports.deleteRequest = async (req, res) => {
 	const user = (await req.user)[0];
 	//Delete the donation
 	try {
-		await Request.findOneAndDelete({ _id: requestID, userId: user._id });
+		await Request.findOneAndUpdate(
+			{ _id: requestID, userId: user._id },
+			{ isAvailable: false }
+		);
 		res.redirect("/dashboard");
 	} catch (error) {
 		res.redirect("/error404");

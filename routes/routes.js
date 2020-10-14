@@ -23,17 +23,25 @@ router.get("/", async (req, res) => {
 	}
 });
 
+// Donation Related Routes
 router.get("/donations", isloggedin, donationController.getDonations);
 router.post("/donations/add", isloggedin, donationController.addDonation);
+router.get("/donations/add", isloggedin, (req, res) => {
+	res.render("donationForm");
+});
 router.get("/donations/del/:id", isloggedin, donationController.deleteDonation);
+
+// Requests related Routes
 router.get("/requests", isloggedin, requestController.getRequests);
 router.post("/requests/add", isloggedin, requestController.addRequest);
+router.get("/requests/add", isloggedin, (req, res) => {
+	res.render("requestForm");
+});
 router.get("/requests/del/:id", isloggedin, requestController.deleteRequest);
 
 //////////////////////////////////////////
 /////// User  Authentication Routes ///////
 ////////////////////////////////////////
-
 router.get("/dashboard", isloggedin, async (req, res) => {
 	const user = (await req.user)[0];
 	res.render("dashboard", {

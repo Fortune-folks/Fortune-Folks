@@ -57,17 +57,13 @@ exports.getDonations = async (req, res) => {
 
 exports.getDonationsByUser = async (req, res) => {
 	const user = (await req.user)[0];
-	const data = await Donation.find({ userId: user._id });
-	data.sort((a, b) => {
-		var t1 = new Date(a.createdOn);
-		var t2 = new Date(b.createdOn);
-		return t1.getTime() < t2.getTime();
-	});
-	// TO-DO
-	// Should implement more optimal solution for this loop as this increases loading time of page when DB is large.
+	const data = await Donation.find({ isAvailable: true, userId: user._id })
+		.populate("userId")
+		.populate("pickAddress")
+		.sort({ createdOn: "asc" });
 	for (let i = 0; i < data.length; i++) {
-		let temp = await User.findById(data[i].userId);
-		let temp2 = await Address.findById(data[i].pickAddress);
+		let temp = data[i].userId;
+		let temp2 = data[i].pickAddress;
 		data[i]["firstname"] = temp.firstName;
 		data[i]["lastname"] = temp.lastName;
 		data[i]["mobileno"] = temp.mobileNo;
@@ -83,7 +79,10 @@ exports.deleteDonation = async (req, res) => {
 	const user = (await req.user)[0];
 	//Delete the donation
 	try {
-		await Donation.findOneAndDelete({ _id: donationID, userId: user._id });
+		await Donation.findOneAndUpdate(
+			{ _id: donationID, userId: user._id },
+			{ isAvailable: false }
+		);
 		res.redirect("/dashboard");
 	} catch (error) {
 		res.redirect("/error404");

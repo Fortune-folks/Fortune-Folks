@@ -4,6 +4,7 @@ window.onload = function () {
 	var z = document.getElementById("demo");
 	getLocation();
 	function getLocation() {
+		console.log("HERE");
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(getPosition, showError);
 		} else {
