@@ -1,14 +1,32 @@
+<link
+	rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+	crossorigin="anonymous"
+/>
+
 <% data.forEach(datam=>{ %> <% if (datam.isAvailable) {%>
-<div class="card m-4">
+<div class="card bg-light m-4">
 	<div class="card-header">
 		<h4 class=""><%= datam.firstname +' '+ datam.lastname %></h4>
+		<i class="fa fa-mobile" aria-hidden="true"></i>
 		<a href="tel:<%=datam.mobileno%>"> <%=datam.mobileno%> </a>
 	</div>
 	<div class="card-body">
-		<h5 class="card-title">Food for <%= datam.quantity %> Members</h5>
+		<h5 class="card-title">
+			<i class="fa fa-users" aria-hidden="true"></i>
+			<%= datam.quantity %>
+			<i class="fa fa-clock-o" aria-hidden="true"></i>
+			<%= datam.time %> ago
+		</h5>
+		<p class="card-text"></p>
+		<p class="card-text">
+			<i class="fa fa-address-card" aria-hidden="true"></i>
+			<%= datam.address %>
+		</p>
 		<p class="card-text"><%= datam.description %></p>
-		<p class="card-text"><%= datam.address %></p>
-		<p class="card-text">Posted <%= datam.time %> ago</p>
+
+		<p class="card-text"></p>
 		<a
 			href="https://www.google.com/maps/search/?api=1&query=<%= datam.location %>"
 			target="_blank"

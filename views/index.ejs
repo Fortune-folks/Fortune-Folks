@@ -30,21 +30,23 @@
 		></script>
 	</head>
 	<body>
-		<h1>This is the home page of our website</h1>
-		<% if (isauth) { %>
+		<section>
+			<h1>This is the home page of our website</h1>
+			<% if (isauth) { %>
 
-		<div>
-			<h2>Name:<%= user.firstName+" "+user.lastName %></h2>
-			<h2>Food Donated: <%= user.foodDonated %></h2>
-			<h2>Food Requested: <%= user.foodRequested %></h2>
-		</div>
-		<a href="/logout">logout</a>
-		<a href="/donations">All Donations</a>
-		<a href="/requests">All Requests</a>
-		<a href="/dashboard">Dashboard</a>
-		<% } else { %>
-		<a href="/register">Register</a>
-		<a href="/login">Login</a>
-		<% } %>
+			<div>
+				<h2>Name:<%= user.firstName+" "+user.lastName %></h2>
+				<h2>Food Donated: <%= user.foodDonated %></h2>
+				<h2>Food Requested: <%= user.foodRequested %></h2>
+			</div>
+			<a href="/logout">logout</a>
+			<a href="/donations">All Donations</a>
+			<a href="/requests">All Requests</a>
+			<a href="/dashboard">Dashboard</a>
+			<% } else { %>
+			<a href="/register">Register</a>
+			<a href="/login">Login</a>
+			<% } %>
+		</section>
 	</body>
 </html>

@@ -17,9 +17,9 @@ router.get("/", async (req, res) => {
 	if (isauth) {
 		//IDK why but it returns an array
 		const user = (await req.user)[0];
-		res.render("index", { isauth: isauth, user: user });
+		res.render("fortunefolks", { isauth: isauth, user: user });
 	} else {
-		res.render("index", { isauth: isauth });
+		res.render("fortunefolks", { isauth: isauth });
 	}
 });
 
@@ -58,7 +58,7 @@ router.get("/register", (req, res) => {
 router.post("/register", userController.register);
 
 router.get("/login", (req, res) => {
-	res.render("login");
+	res.render("joinUs");
 });
 
 router.post(

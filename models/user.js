@@ -8,10 +8,6 @@ const userSchema = new mongoose.Schema({
 	lastName: {
 		type: String,
 	},
-	dob: {
-		type: Date,
-		required: true,
-	},
 	password: {
 		type: String,
 		required: true,

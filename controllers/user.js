@@ -25,7 +25,6 @@ exports.register = async (req, res) => {
 		const user = new User({
 			firstName: req.body.fname,
 			lastName: req.body.lname,
-			dob: req.body.dob,
 			password: hashPass,
 			email: req.body.email,
 			mobileNo: req.body.mobileNo,
