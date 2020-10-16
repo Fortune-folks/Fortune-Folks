@@ -76,6 +76,19 @@ router.get("/logout", (req, res) => {
 });
 
 router.post("/profile/update", isloggedin, userController.update);
+
+////////////////////////////////////////
+/////////// Extra   Route ///////////
+////////////////////////////////////////
+
+router.get("/faq", (req, res) => {
+	res.render("FAQ");
+});
+
+router.get("/donate/money", (req, res) => {
+	res.render("moneyDonation");
+});
+
 /////////////////////////////////////////
 ////////// Custom Middlewares ///////////
 /////////////////////////////////////////

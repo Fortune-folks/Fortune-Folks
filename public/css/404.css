@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,500);
+
 .fundo {
 	animation: scales 3s alternate infinite;
 	transform-origin: center;
@@ -28,6 +30,15 @@
 .olhos {
 	animation: olhos 2s alternate infinite;
 	transform-origin: center;
+}
+p {
+	color: #fff;
+	font-size: 100%;
+	line-height: 1.5;
+	font-family: "Roboto", sans-serif;
+	font-size: 2em;
+	text-align: center;
+	font-weight: 100;
 }
 @keyframes scales {
 	from {
