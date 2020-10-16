@@ -25,6 +25,7 @@ router.get("/", async (req, res) => {
 
 // Donation Related Routes
 router.get("/donations", isloggedin, donationController.getDonations);
+router.post("/donations", isloggedin, donationController.findNearbyDonations);
 router.post("/donations/add", isloggedin, donationController.addDonation);
 router.get("/donations/add", isloggedin, (req, res) => {
 	res.render("donationForm");

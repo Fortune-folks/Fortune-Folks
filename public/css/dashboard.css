@@ -27,6 +27,7 @@ html {
 }
 #dashboard .dash-bar {
 	position: fixed;
+	margin-top: 50px;
 }
 
 .sticky {

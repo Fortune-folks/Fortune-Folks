@@ -1,6 +1,7 @@
 const Donation = require("../models/donations");
 const User = require("../models/user");
 const Address = require("../models/address");
+const donations = require("../models/donations");
 
 // Adds a donation by a user to the databasee
 exports.addDonation = async (req, res) => {
@@ -89,6 +90,38 @@ exports.deleteDonation = async (req, res) => {
 	}
 };
 
+exports.findNearbyDonations = async (req, res) => {
+	const long = req.body.latitude;
+	const latt = req.body.longitude;
+	const maxDis = req.body.maxDistance;
+	const data = await Donation.find({ isAvailable: true, quantity: req.body.quantity })
+		.populate("userId")
+		.populate({
+			path: "pickAddress",
+			match: {
+				location: {
+					$near: {
+						$maxDistance: maxDis * 1000,
+						$geometry: {
+							type: "Point",
+							coordinates: [long, latt],
+						},
+					},
+				},
+			},
+		});
+	for (let i = 0; i < data.length; i++) {
+		let temp = data[i].userId;
+		let temp2 = data[i].pickAddress;
+		data[i]["firstname"] = temp.firstName;
+		data[i]["lastname"] = temp.lastName;
+		data[i]["mobileno"] = temp.mobileNo;
+		data[i]["time"] = date_and_time(data[i].createdOn);
+		data[i]["address"] = temp2.addressLine1 + " " + temp2.addressLine2 + " " + temp2.city;
+		data[i]["location"] = temp2.location.coordinates[0] + "," + temp2.location.coordinates[1];
+	}
+	res.render("donations", { data: data });
+};
 /////////////////////////////////////////////////
 ///////////// Helper Methods ///////////////////
 ////////////////////////////////////////////////

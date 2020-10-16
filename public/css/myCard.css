@@ -79,7 +79,6 @@ body {
 .card a.card_button {
 	display: inline-block;
 	width: 45%;
-	background: #ef3e36;
 	color: #fff;
 	position: left;
 	text-transform: uppercase;
@@ -88,6 +87,13 @@ body {
 	padding: 10px;
 	transition: 250ms;
 	margin: 10px;
+}
+
+.green {
+	background: #4caf50;
+}
+.red {
+	background: #ef3e36;
 }
 .card a.card_button:hover {
 	background: #17bebb;
