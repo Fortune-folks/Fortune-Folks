@@ -44,7 +44,7 @@ router.get("/requests/del/:id", isloggedin, requestController.deleteRequest);
 ////////////////////////////////////////
 router.get("/dashboard", isloggedin, async (req, res) => {
 	const user = (await req.user)[0];
-	res.render("dashboard", {
+	res.render("dash", {
 		user: user,
 		donations: await donationController.getDonationsByUser(req, res),
 		requests: await requestController.getRequestsByUser(req, res),
@@ -75,6 +75,7 @@ router.get("/logout", (req, res) => {
 	return res.redirect("/");
 });
 
+router.post("/profile/update", isloggedin, userController.update);
 /////////////////////////////////////////
 ////////// Custom Middlewares ///////////
 /////////////////////////////////////////

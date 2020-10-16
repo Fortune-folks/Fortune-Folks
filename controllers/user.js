@@ -33,8 +33,20 @@ exports.register = async (req, res) => {
 
 		//Saving the user details in database
 		const savedData = await user.save();
-		res.redirect(200, "/login");
+		res.redirect("/login");
 	} catch (err) {
 		res.redirect("/error");
 	}
+};
+
+exports.update = async (req, res) => {
+	const user = (await req.user)[0];
+	const savedUser = await User.findById(user._id);
+	savedUser.firstName = req.body.fname;
+	savedUser.lastName = req.body.lname;
+	savedUser.email = req.body.email;
+	savedUser.mobileNo = req.body.mobileNo;
+	await savedUser.save();
+	res.redirect("/dashboard");
+	//const updatedUser = await User.findOneAndUpdate({ _id: user._id }, req.body, { new: true });
 };

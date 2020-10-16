@@ -1,5 +1,3 @@
-<!-- Header section -->
-<link href="/css/navbar.css" rel="stylesheet" />
 <section id="header">
 	<div class="header container">
 		<div class="nav-bar">
@@ -17,14 +15,22 @@
 					<li><a href="#joinus" data-after="joinus">Donate</a></li>
 					<!--   <li> <a href="#team"   data-after="team">team</a></li> -->
 					<li><a href="#contact" data-after="Contact">Contact</a></li>
+					<% if(!isauth) { %>
 					<li>
 						<a href="/login" data-after="Register">
 							<button type="button" class="join-btn">LOGIN</button></a
 						>
 					</li>
+					<% } else{ %>
+					<li><a href="/dashboard" data-after="joinus">Dashboard</a></li>
+					<li>
+						<a href="/logout" data-after="Register">
+							<button type="button" class="join-btn">Logout</button></a
+						>
+					</li>
+					<%}%>
 				</ul>
 			</div>
 		</div>
 	</div>
 </section>
-<script src="/js/navbar.js"></script>
