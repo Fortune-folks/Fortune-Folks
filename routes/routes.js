@@ -34,6 +34,7 @@ router.get("/donations/del/:id", isloggedin, donationController.deleteDonation);
 
 // Requests related Routes
 router.get("/requests", isloggedin, requestController.getRequests);
+router.post("/requests", isloggedin, requestController.findNearbyRequests);
 router.post("/requests/add", isloggedin, requestController.addRequest);
 router.get("/requests/add", isloggedin, (req, res) => {
 	res.render("requestForm");
