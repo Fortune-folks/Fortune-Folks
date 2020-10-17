@@ -53,7 +53,12 @@ exports.getDonations = async (req, res) => {
 		data[i]["address"] = temp2.addressLine1 + " " + temp2.addressLine2 + " " + temp2.city;
 		data[i]["location"] = temp2.location.coordinates[0] + "," + temp2.location.coordinates[1];
 	}
-	res.render("donations", { data: data });
+	const user = await req.user;
+	let isAuth = false;
+	if (user) {
+		isAuth = true;
+	}
+	res.render("donations", { data: data, isAuth: isAuth });
 };
 
 exports.getDonationsByUser = async (req, res) => {
@@ -94,7 +99,11 @@ exports.findNearbyDonations = async (req, res) => {
 	const long = req.body.latitude;
 	const latt = req.body.longitude;
 	const maxDis = req.body.maxDistance;
-	const data = await Donation.find({ isAvailable: true, quantity: req.body.quantity })
+	const quantity = req.body.quantity;
+	const data = await Donation.find({
+		isAvailable: true,
+		quantity: { $gt: quantity },
+	})
 		.populate("userId")
 		.populate({
 			path: "pickAddress",
@@ -110,9 +119,11 @@ exports.findNearbyDonations = async (req, res) => {
 				},
 			},
 		});
+
 	for (let i = 0; i < data.length; i++) {
 		let temp = data[i].userId;
 		let temp2 = data[i].pickAddress;
+		if (!temp2) continue;
 		data[i]["firstname"] = temp.firstName;
 		data[i]["lastname"] = temp.lastName;
 		data[i]["mobileno"] = temp.mobileNo;
@@ -120,7 +131,12 @@ exports.findNearbyDonations = async (req, res) => {
 		data[i]["address"] = temp2.addressLine1 + " " + temp2.addressLine2 + " " + temp2.city;
 		data[i]["location"] = temp2.location.coordinates[0] + "," + temp2.location.coordinates[1];
 	}
-	res.render("donations", { data: data });
+	const user = await req.user;
+	let isAuth = false;
+	if (user) {
+		isAuth = true;
+	}
+	res.render("donations", { data: data, isAuth: isAuth });
 };
 /////////////////////////////////////////////////
 ///////////// Helper Methods ///////////////////

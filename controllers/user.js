@@ -1,19 +1,22 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
+const Mailer = require("./mailer.js");
+const OtpManager = require("./otp.js");
+
 //User registration
 
 exports.register = async (req, res) => {
 	//checking if an user already exists with this particular email
 	const tempUser = await User.findOne({ email: req.body.email });
 	if (tempUser) {
-		res.render("register", { error: "Email already used" });
+		res.render("joinUs", { error: "Email already used" });
 		return;
 	}
 	//checking if an user already exists with this particular mobileNo
 	const tempUser2 = await User.findOne({ mobileNo: req.body.mobileNo });
 	if (tempUser2) {
-		res.render("register", { error: "Mobile Number already used" });
+		res.render("joinUs", { error: "Mobile Number already used" });
 		return;
 	}
 	try {
@@ -30,7 +33,8 @@ exports.register = async (req, res) => {
 			mobileNo: req.body.mobileNo,
 			verified: false,
 		});
-
+		await Mailer.sendMail(user.email);
+		await OtpManager.send_otp(user.mobileNo);
 		//Saving the user details in database
 		const savedData = await user.save();
 		res.redirect("/login");

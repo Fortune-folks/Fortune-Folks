@@ -24,8 +24,8 @@ router.get("/", async (req, res) => {
 });
 
 // Donation Related Routes
-router.get("/donations", isloggedin, donationController.getDonations);
-router.post("/donations", isloggedin, donationController.findNearbyDonations);
+router.get("/donations", donationController.getDonations);
+router.post("/donations", donationController.findNearbyDonations);
 router.post("/donations/add", isloggedin, donationController.addDonation);
 router.get("/donations/add", isloggedin, (req, res) => {
 	res.render("donationForm");
@@ -33,8 +33,8 @@ router.get("/donations/add", isloggedin, (req, res) => {
 router.get("/donations/del/:id", isloggedin, donationController.deleteDonation);
 
 // Requests related Routes
-router.get("/requests", isloggedin, requestController.getRequests);
-router.post("/requests", isloggedin, requestController.findNearbyRequests);
+router.get("/requests", requestController.getRequests);
+router.post("/requests", requestController.findNearbyRequests);
 router.post("/requests/add", isloggedin, requestController.addRequest);
 router.get("/requests/add", isloggedin, (req, res) => {
 	res.render("requestForm");
@@ -54,7 +54,7 @@ router.get("/dashboard", isloggedin, async (req, res) => {
 });
 
 router.get("/register", (req, res) => {
-	res.render("register", { error: "" });
+	res.render("joinUs", { error: "" });
 });
 
 router.post("/register", userController.register);
