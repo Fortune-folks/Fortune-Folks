@@ -51,6 +51,10 @@ exports.update = async (req, res) => {
 	savedUser.email = req.body.email;
 	savedUser.mobileNo = req.body.mobileNo;
 	await savedUser.save();
+	if (req.body.otp) {
+		OtpManager.verify_otp(user.mobileNo, req.body.otp);
+	}
 	res.redirect("/dashboard");
+
 	//const updatedUser = await User.findOneAndUpdate({ _id: user._id }, req.body, { new: true });
 };

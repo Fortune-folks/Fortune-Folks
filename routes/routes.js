@@ -78,7 +78,6 @@ router.get("/logout", (req, res) => {
 });
 
 router.post("/profile/update", isloggedin, userController.update);
-
 ////////////////////////////////////////
 /////////// Extra   Route ///////////
 ////////////////////////////////////////
@@ -89,6 +88,15 @@ router.get("/faq", (req, res) => {
 
 router.get("/donate/money", (req, res) => {
 	res.render("moneyDonation");
+});
+
+router.get("/work", async (req, res) => {
+	const user = await req.user;
+	let isAuth = false;
+	if (user) {
+		isAuth = true;
+	}
+	res.render("work", { isauth: isAuth });
 });
 
 /////////////////////////////////////////
