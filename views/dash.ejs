@@ -50,6 +50,16 @@
 					<form action="/profile/update" class="sign-up-form" method="POST">
 						<div class="sign-up-inputs">
 							<div class="sign-up-left">
+								<% if(!user.verified){ %>
+								<div class="alert">
+									<span
+										class="closebtn"
+										onclick="this.parentElement.style.display='none';"
+										>&times;</span
+									>
+									<strong>Attention!</strong> Validate your account
+								</div>
+								<%}%>
 								<div class="f-box">
 									<div class="f-text">
 										<h3>FirstName</h3>
@@ -92,6 +102,22 @@
 										/>
 									</div>
 								</div>
+								<% if(!user.verfied) {%>
+								<div class="f-box">
+									<div class="f-text">
+										<h3>OTP</h3>
+									</div>
+									<div class="input-field">
+										<i class="fas fa-lock"></i>
+										<input
+											type="number"
+											id="otp"
+											name="otp"
+											placeholder="OTP"
+										/>
+									</div>
+								</div>
+								<%}%>
 								<div class="f-box">
 									<div class="f-text">
 										<h3>Email</h3>
@@ -139,6 +165,7 @@
 							</div>
 						</div>
 						<input type="submit" class="btn" value="Update" />
+						<input type="button" class="btn" value="Resent OTP" />
 					</form>
 				</div>
 				<div class="donations">

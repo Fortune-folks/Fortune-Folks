@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/css/myCard.css" />
-<% data.forEach(datam=>{ %> <% if (datam.isAvailable) {%>
+<% data.forEach(datam=>{ %> <% if (datam.firstname) {%>
 <div class="card">
 	<div class="header"></div>
 	<div class="text">
@@ -23,11 +23,11 @@
 	<a
 		href="https://www.google.com/maps/search/?api=1&query=<%= datam.location %>"
 		target="_blank"
-		class="card_button"
+		class="card_button green"
 		>Locate</a
 	>
 	<% if (delRoute) {%>
-	<a href="<%= delRoute+datam._id %>" class="card_button">Remove</a>
+	<a href="<%= delRoute+datam._id %>" class="card_button red">Remove</a>
 	<%}%>
 </div>
 

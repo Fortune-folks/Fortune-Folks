@@ -24,10 +24,8 @@ router.get("/", async (req, res) => {
 });
 
 // Donation Related Routes
-router.get("/donations", isloggedin, donationController.getDonations);
-router.post("/donations",isloggedin,(req,res)=>{
-	console.log(req.body);
-})
+router.get("/donations", donationController.getDonations);
+router.post("/donations", donationController.findNearbyDonations);
 router.post("/donations/add", isloggedin, donationController.addDonation);
 router.get("/donations/add", isloggedin, (req, res) => {
 	res.render("donationForm");
@@ -35,7 +33,8 @@ router.get("/donations/add", isloggedin, (req, res) => {
 router.get("/donations/del/:id", isloggedin, donationController.deleteDonation);
 
 // Requests related Routes
-router.get("/requests", isloggedin, requestController.getRequests);
+router.get("/requests", requestController.getRequests);
+router.post("/requests", requestController.findNearbyRequests);
 router.post("/requests/add", isloggedin, requestController.addRequest);
 router.get("/requests/add", isloggedin, (req, res) => {
 	res.render("requestForm");
@@ -55,7 +54,7 @@ router.get("/dashboard", isloggedin, async (req, res) => {
 });
 
 router.get("/register", (req, res) => {
-	res.render("register", { error: "" });
+	res.render("joinUs", { error: "" });
 });
 
 router.post("/register", userController.register);
@@ -79,7 +78,6 @@ router.get("/logout", (req, res) => {
 });
 
 router.post("/profile/update", isloggedin, userController.update);
-
 ////////////////////////////////////////
 /////////// Extra   Route ///////////
 ////////////////////////////////////////
@@ -90,6 +88,15 @@ router.get("/faq", (req, res) => {
 
 router.get("/donate/money", (req, res) => {
 	res.render("moneyDonation");
+});
+
+router.get("/work", async (req, res) => {
+	const user = await req.user;
+	let isAuth = false;
+	if (user) {
+		isAuth = true;
+	}
+	res.render("work", { isauth: isAuth });
 });
 
 /////////////////////////////////////////

@@ -5,7 +5,6 @@ const Request = require("../models/requests");
 exports.addRequest = async (req, res) => {
 	//Getting the user who requested
 	const user = (await req.user)[0];
-
 	const address = new Address({
 		addressLine1: req.body.addLine1,
 		addressLine2: req.body.addLine2,
@@ -50,7 +49,12 @@ exports.getRequests = async (req, res) => {
 		data[i]["address"] = temp2.addressLine1 + " " + temp2.addressLine2 + " " + temp2.city;
 		data[i]["location"] = temp2.location.coordinates[0] + "," + temp2.location.coordinates[1];
 	}
-	res.render("requests", { data: data });
+	const user = await req.user;
+	let isAuth = false;
+	if (user) {
+		isAuth = true;
+	}
+	res.render("requests", { data: data, isAuth: isAuth });
 };
 
 exports.getRequestsByUser = async (req, res) => {
@@ -76,6 +80,45 @@ exports.getRequestsByUser = async (req, res) => {
 	return data;
 };
 
+exports.findNearbyRequests = async (req, res) => {
+	const long = req.body.latitude;
+	const latt = req.body.longitude;
+	const maxDis = req.body.maxDistance;
+	const quantity = req.body.quantity;
+	const data = await Request.find({ isAvailable: true, quantity: { $lt: quantity } })
+		.populate("userId")
+		.populate({
+			path: "pickAddress",
+			match: {
+				location: {
+					$near: {
+						$maxDistance: maxDis * 1000,
+						$geometry: {
+							type: "Point",
+							coordinates: [long, latt],
+						},
+					},
+				},
+			},
+		});
+	for (let i = 0; i < data.length; i++) {
+		let temp = data[i].userId;
+		let temp2 = data[i].pickAddress;
+		if (!temp2) continue;
+		data[i]["firstname"] = temp.firstName;
+		data[i]["lastname"] = temp.lastName;
+		data[i]["mobileno"] = temp.mobileNo;
+		data[i]["time"] = date_and_time(data[i].createdOn);
+		data[i]["address"] = temp2.addressLine1 + " " + temp2.addressLine2 + " " + temp2.city;
+		data[i]["location"] = temp2.location.coordinates[0] + "," + temp2.location.coordinates[1];
+	}
+	const user = await req.user;
+	let isAuth = false;
+	if (user) {
+		isAuth = true;
+	}
+	res.render("requests", { data: data, isAuth: isAuth });
+};
 exports.deleteRequest = async (req, res) => {
 	const requestID = req.params.id;
 	const user = (await req.user)[0];
