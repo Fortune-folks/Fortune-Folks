@@ -14,5 +14,9 @@ Excessive food listing portal for avoiding food wastage. People can list the ava
 * [x] Authentication
 * [x] donations listing page
 * [x] requests listing page
-* [ ] user profile page
-* [ ] adding fuctionality to donations/requests to mark them as completed.
+* [x] user profile page
+* [x] adding fuctionality to donations/requests to mark them as completed.
+* [x] add filters.
+* [x] Mobile No verification/email verification.
+* [ ] food releated possible issues and their solution. 
+* [ ] Donate money page.
