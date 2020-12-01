@@ -39,7 +39,9 @@ exports.register = async (req, res) => {
 		const savedData = await user.save();
 		res.redirect("/login");
 	} catch (err) {
+		console.log(err);
 		res.redirect("/error");
+		
 	}
 };
 
