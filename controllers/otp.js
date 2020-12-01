@@ -12,7 +12,7 @@ exports.send_otp = async (mobileNo) => {
 
 	//Creating a new OTP model
 	const otp = new OTP({
-		mobileNo: mobileNo,
+		mobileNo: "+91" + mobileNo,
 		otp: ranOTP,
 		createdOn: Date.now(),
 		expiresOn: Date.now() + ttx,
@@ -42,28 +42,28 @@ exports.send_otp = async (mobileNo) => {
 };
 
 //Verifies the OTP and
-exports.verify_otp = async (mobileNo, otp) => {
+exports.verify_otp = async (mobileNo, enteredOTP) => {
 	try {
+		console.log(mobileNo);
 		const otp = await OTP.findOne({
-			mobileNo: mobileNo,
-			otp: otp,
+			mobileNo: "+91" + mobileNo,
+			otp: enteredOTP,
 		});
-
+		console.log(otp);
 		if (otp) {
 			const currTime = Date.now();
 			const expiryTime = new Date(otp.expiresOn).getTime();
-			if (currTime < expiryTime) {
-				//Find and update user verfication status with this mobileNo
-				const result = await User.findOneAndUpdate(
-					{ mobileNo: req.body.mobileNo },
-					{ verified: true },
-					{ useFindAndModify: false }
-				);
-				if (result != null) {
-					return true;
-				} else {
-					return false;
-				}
+			//Find and update user verfication status with this mobileNo
+			const result = await User.findOneAndUpdate(
+				{ mobileNo: req.body.mobileNo },
+				{ verified: true },
+				{ useFindAndModify: false }
+			);
+			console.log(result);
+			if (result != null) {
+				return true;
+			} else {
+				return false;
 			}
 		}
 		return true;

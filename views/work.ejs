@@ -5,9 +5,10 @@
 		<style>
 			body {
 				background-color: black;
-				background-image: url("/images/Work_criteria.jpeg");
-				background-size: cover;
+			}
+			img {
 				height: 100vh;
+				width: 100vw;
 			}
 		</style>
 		<link rel="stylesheet" href="/css/dashboard.css" />
@@ -16,5 +17,6 @@
 	</head>
 	<body>
 		<%- include("_navbar",{isauth:isauth}) -%>
+		<img src="/images/Work_criteria.jpeg" />
 	</body>
 </html>

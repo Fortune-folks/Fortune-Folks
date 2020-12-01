@@ -34,7 +34,7 @@ exports.register = async (req, res) => {
 			verified: false,
 		});
 		await Mailer.sendMail(user.email);
-		await OtpManager.send_otp(user.mobileNo);
+		// await OtpManager.send_otp(user.mobileNo);
 		//Saving the user details in database
 		const savedData = await user.save();
 		res.redirect("/login");
@@ -57,4 +57,9 @@ exports.update = async (req, res) => {
 	res.redirect("/dashboard");
 
 	//const updatedUser = await User.findOneAndUpdate({ _id: user._id }, req.body, { new: true });
+};
+
+exports.resendOTP = async (req, res) => {
+	await OtpManager.send_otp(req.body.mobileNo);
+	res.redirect("/dashboard");
 };

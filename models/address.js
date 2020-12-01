@@ -16,7 +16,6 @@ const addressSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-
 	location: {
 		type: {
 			type: String,
@@ -30,5 +29,6 @@ const addressSchema = new mongoose.Schema({
 	},
 });
 
+//Necessary for geolocation queries
 addressSchema.index({ location: "2dsphere" });
 module.exports = mongoose.model("Address", addressSchema);
