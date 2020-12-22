@@ -31,14 +31,7 @@ app.set("view engine", "ejs");
 ////////////////////////////////////////////
 //Connecting to the MongoDB Altas Database//
 ////////////////////////////////////////////
-const connURL =
-	"mongodb+srv://" +
-	process.env.DB_USER +
-	":" +
-	process.env.DB_PWD +
-	"@cluster0-avdpm.mongodb.net/" +
-	process.env.DB_NAME +
-	"?retryWrites=true&w=majority";
+const connURL = process.env.DB_URL;
 
 mongoose.connect(connURL, {
 	useNewUrlParser: true,

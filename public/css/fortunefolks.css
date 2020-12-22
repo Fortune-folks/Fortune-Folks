@@ -64,9 +64,6 @@ body{
   transition: 0.3s;
   width: 100px;
 }
-
-
-}
 #header .join-button:hover i{
   animation: shake 1s;
 }
@@ -232,7 +229,7 @@ body{
   overflow: hidden;
   cursor: pointer;
   transition: .3s ease ;
-}
+}z
 #initiatives .initiative-item:nth-child(2){
   background-image: url(../images/initiative/Untitled\ design\ \(4\).jpg);
 }
@@ -851,8 +848,28 @@ textarea.input {
 /* Media Screen Mobile */
 
 @media (max-width: 480px) {
-  .container {
-    padding: 1.5rem;
+  #home .main-links{
+    height: 120px;
+  }
+
+  #home .main-links .fta{
+   
+  padding: 0.6rem 1.3rem;
+  background-color: #fff;
+  border: 2px solid #fafafa;
+  font-size: 0.95rem;
+  color: #26a897;
+  line-height: 1;
+  border-radius: 25px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 0;
+  width: 100%;
+    
+  }
+  #home .main-links .fat2{
+    margin-top: 20px;
   }
 
   .contact-info:before {
@@ -864,9 +881,13 @@ textarea.input {
     display: none;
   }
 
+
   form,
   .contact-info {
     padding: 1.7rem 1.6rem;
+  }
+  .contact-info{
+    display: none;
   }
 
   .text,
@@ -898,6 +919,9 @@ textarea.input {
   }
   .submit-box i{
     color: blue;
+  }
+  #team .team{
+    display: none;
   }
   
 }
@@ -1270,7 +1294,23 @@ textarea.input {
 /******************** Media Screen mobile ******************/
 
 @media (max-width: 480px) {
+  .section-title{
+    font-size: 3rem;
+  }
 
+  /* Home section */
+  #home .principal h1{
+    font-size: 3rem;
+  }
+
+  /* End Home section */
+#about .about{
+  display: flex;
+  flex-direction: column-reverse;
+}
+#about .about .about-right h2{
+  font-size: 1.2rem;
+}
   /* Contact Section */
   #contact .contact-info:before {
     display: none;
@@ -1285,7 +1325,9 @@ textarea.input {
   .contact-info {
     padding: 1.7rem 1.6rem;
   }
-
+  .contact-form{
+    width: 350px;
+  }
   .text,
   .information,
   .social-media p {
@@ -1315,6 +1357,9 @@ textarea.input {
   }
   .submit-box i{
     color: blue;
+  }
+  #joinus{
+    padding: 10px 10px;
   }
 }
 @media(min-width:1200px){
@@ -1351,4 +1396,6 @@ textarea.input {
 #team .team-container{
     justify-content: center;
      align-items: center;
-     flex-direction: column;}
+     flex-direction: column;
+    }
+  }
